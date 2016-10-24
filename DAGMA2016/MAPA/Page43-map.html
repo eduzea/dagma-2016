@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page43-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="794, 738, 1095, 880" href="Page42.html" target='_parent' alt="REALIZAR LA EVALUACION DE LA AMENAZA DE CONTAMINACION DEL AGUA SUBTERRANEA">
+<area shape="rect" coords="794, 1042, 1061, 1181" href="Page44.html" target='_parent' alt="REALIZAR LA EVALUACION HIDROGEOQUIMICA DEL AGUA SUBTERRANEA">
+<area shape="rect" coords="794, 1192, 1085, 1331" href="Page45.html" target='_parent' alt="REALIZAR LA SUPERVISION DE LA ELABORACIÓN DEL DOCUMENTO DIAGNOSTICO">
+<area shape="rect" coords="410, 9, 778, 198" href="Page8.html" target='_parent' alt="IMPLEMENTACION DEL PLAN DE MANEJO Y CONTROL PARA LA PROTECCION DE LAS AGUAS SUBTERRANEAS AREA URBANA DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="410, 210, 780, 384" href="Page12.html" target='_parent' alt="ADMINISTRACION, MONITOREO Y CONTROL PARA LA DISMINUCION DE  LA CONTAMINACION AMBIENTAL DE LOS RIOS DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="410, 396, 786, 555" href="Page23.html" target='_parent' alt="CONSTRUCCION  DE OBRAS PARA REDUCIR CARGA CONTAMINANTE EN LOS RIOS DEL  MUNICIPIO DE CALI">
+<area shape="rect" coords="410, 567, 773, 726" href="Page35.html" target='_parent' alt="CONTROL Y VIGILANCIA DEL RECURSO HÍDRICO  EN EL ÁREA URBANA DEL MUNICIPIO DE SANTIAGO DE CALI.">
+<area shape="rect" coords="410, 1343, 782, 1517" href="Page46.html" target='_parent' alt="MANTENIMIENTO DEL SISTEMA DE TRATAMIENTO DE LIXIVIADOS  DEL SITIO DE DISPOSICION FINAL DE NAVARRO EN EL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="410, 9, 778, 198" href="Page8.html" target='_parent' alt="IMPLEMENTACION DEL PLAN DE MANEJO Y CONTROL PARA LA PROTECCION DE LAS AGUAS SUBTERRANEAS AREA URBANA DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="410, 210, 780, 384" href="Page12.html" target='_parent' alt="ADMINISTRACION, MONITOREO Y CONTROL PARA LA DISMINUCION DE  LA CONTAMINACION AMBIENTAL DE LOS RIOS DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="410, 396, 786, 555" href="Page23.html" target='_parent' alt="CONSTRUCCION  DE OBRAS PARA REDUCIR CARGA CONTAMINANTE EN LOS RIOS DEL  MUNICIPIO DE CALI">
+<area shape="rect" coords="410, 567, 773, 726" href="Page35.html" target='_parent' alt="CONTROL Y VIGILANCIA DEL RECURSO HÍDRICO  EN EL ÁREA URBANA DEL MUNICIPIO DE SANTIAGO DE CALI.">
+<area shape="rect" coords="410, 1025, 775, 1185" href="Page41.html" target='_parent' alt="FORMULACION DEL PLAN DE MANEJO DE ACUÍFEROS  PARA LA ZONA URBANA DE SANTIAGO DE CALI">
+<area shape="rect" coords="410, 1343, 782, 1517" href="Page46.html" target='_parent' alt="MANTENIMIENTO DEL SISTEMA DE TRATAMIENTO DE LIXIVIADOS  DEL SITIO DE DISPOSICION FINAL DE NAVARRO EN EL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="9, 700, 390, 826" href="Page7.html" target='_parent' alt="AGUAS">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

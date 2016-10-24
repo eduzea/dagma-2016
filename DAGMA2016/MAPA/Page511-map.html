@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page511-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="13, 644, 325, 786" href="Page508.html" target='_parent' alt="ADQUIRIR E INSTALAR EQUIPOS COMPLEMENTARIOS QUE PERMITAN  EL FUNCIONAMIENTO TOTAL DEL SAT">
+<area shape="rect" coords="25, 798, 325, 951" href="Page509.html" target='_parent' alt="DEFINIR ESTRATEGIAS DE COMUNICACIÓN, EDUCACIÓN Y PREVENCIÓN PARA LA REDUCCIÓN DE DESASTRES Y EMERGENCIAS">
+<area shape="rect" coords="11, 963, 325, 1117" href="Page510.html" target='_parent' alt="DEFINIR LOS SITIOS Y EQUIPOS COMPLEMENTARIOS APROPIADOS   QUE PERMITAN EL FUNCIONAMIENTO TOTAL DEL SAT">
+<area shape="rect" coords="18, 1309, 325, 1433" href="Page512.html" target='_parent' alt="MONITOREAR FUNCIONAMIENTO DE LA RED DEL SAT">
+<area shape="rect" coords="16, 1445, 325, 1568" href="Page513.html" target='_parent' alt="REALIZAR INTERVENTORÍA ECONÓMICA, TÉCNICA Y FINANCIERA">
+<area shape="rect" coords="9, 1580, 325, 1748" href="Page514.html" target='_parent' alt="REALIZAR TALLERES DE ACTUALIZACIÓN Y DIFUSIÓN PLAN DE ALERTA TEMPRANA COMUNITARIA PARA LA PREVENCIÓN DE RIESGOS POR INUNDACIONES">
+<area shape="rect" coords="341, 8, 709, 200" href="Page484.html" target='_parent' alt="ESTUDIOS DE AMENAZA, VULNERABILIDAD Y RIESGO POR INUNDACIONES DE LOS RIOS CALI, AGUACATAL, MELENDEZ, LILI, CAÑAVERALEJO Y PANCE CALI">
+<area shape="rect" coords="341, 212, 709, 387" href="Page496.html" target='_parent' alt="FORTALECIMIENTO DE LA CAPACIDAD TÉCNICA Y TECNOLÓGICA DE LA RED DE ACELERÓGRAFOS DE SANTIAGO DE CALI">
+<area shape="rect" coords="333, 398, 709, 633" href="Page501.html" target='_parent' alt="IMPLEMENTACION DE ACTIVIDADES DE RESTAURACION, CONSERVACION, REFORESTACION, Y OBRAS DE BIOINGENIERIA EN AREAS DE PROTECCION AMBIENTAL Y AREAS DEGRADADAS DE LAS COMUNAS 1, 2, 18, 19 Y 20 DE SANTIAGO DE CALI">
+<area shape="rect" coords="373, 1760, 709, 1920" href="Page515.html" target='_parent' alt="IMPLEMENTACION PLAN DE PREVENCION DE INCENDIOS FORESTALES MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="341, 1931, 709, 2091" href="Page522.html" target='_parent' alt="RECUPERACION DE LA CAPACIDAD HIDRAULICA DE LOS RIOS Y QUEBRADAS DE SANTIAGO DE CALI">
+<area shape="rect" coords="338, 2102, 709, 2262" href="Page543.html" target='_parent' alt="RECUPERACION DE LA ESTABILIDAD DE LAS MARGENES DE LOS RIOS DE LA CIUDAD  DE SANTIAGO DE CALI">
+<area shape="rect" coords="341, 8, 709, 200" href="Page484.html" target='_parent' alt="ESTUDIOS DE AMENAZA, VULNERABILIDAD Y RIESGO POR INUNDACIONES DE LOS RIOS CALI, AGUACATAL, MELENDEZ, LILI, CAÑAVERALEJO Y PANCE CALI">
+<area shape="rect" coords="341, 212, 709, 387" href="Page496.html" target='_parent' alt="FORTALECIMIENTO DE LA CAPACIDAD TÉCNICA Y TECNOLÓGICA DE LA RED DE ACELERÓGRAFOS DE SANTIAGO DE CALI">
+<area shape="rect" coords="333, 398, 709, 633" href="Page501.html" target='_parent' alt="IMPLEMENTACION DE ACTIVIDADES DE RESTAURACION, CONSERVACION, REFORESTACION, Y OBRAS DE BIOINGENIERIA EN AREAS DE PROTECCION AMBIENTAL Y AREAS DEGRADADAS DE LAS COMUNAS 1, 2, 18, 19 Y 20 DE SANTIAGO DE CALI">
+<area shape="rect" coords="345, 1187, 709, 1346" href="Page507.html" target='_parent' alt="IMPLEMENTACION DEL SISTEMA DE ALERTA TEMPRANA PARA EL RIESGO DE INUNDACIONES EN EL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="373, 1760, 709, 1920" href="Page515.html" target='_parent' alt="IMPLEMENTACION PLAN DE PREVENCION DE INCENDIOS FORESTALES MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="341, 1931, 709, 2091" href="Page522.html" target='_parent' alt="RECUPERACION DE LA CAPACIDAD HIDRAULICA DE LOS RIOS Y QUEBRADAS DE SANTIAGO DE CALI">
+<area shape="rect" coords="338, 2102, 709, 2262" href="Page543.html" target='_parent' alt="RECUPERACION DE LA ESTABILIDAD DE LAS MARGENES DE LOS RIOS DE LA CIUDAD  DE SANTIAGO DE CALI">
+<area shape="rect" coords="729, 1072, 1092, 1198" href="Page483.html" target='_parent' alt="RIESGO">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

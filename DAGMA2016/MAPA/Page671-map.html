@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page671-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="73, 957, 377, 1084" href="Page668.html" target='_parent' alt="Adquirir los herramientas para mantenimiento del Cerro delos Cristales">
+<area shape="rect" coords="57, 1096, 377, 1234" href="Page669.html" target='_parent' alt="Adquirir los Insumos para produccion de las plantulas que se implantan en el Cerro de los Cristales">
+<area shape="rect" coords="73, 1246, 377, 1384" href="Page670.html" target='_parent' alt="Adquisición de materiales para el alinderamiento del poligono del mirador Cristo Rey">
+<area shape="rect" coords="112, 1517, 377, 1640" href="Page672.html" target='_parent' alt="Construir el Centro de Atenciòn a Visitantes I Etapa.">
+<area shape="rect" coords="75, 1652, 377, 1776" href="Page673.html" target='_parent' alt="Implementación de estrategia de vigilancia y control en l predio Cristo rey">
+<area shape="rect" coords="62, 1788, 377, 1945" href="Page674.html" target='_parent' alt="RESERVA EXCEPCIONAL - ACLARAR-RECUPERACIÓN DE LA OFERTA DE   BIENES Y SERVICIOS AMBIENTALES DEL CERRO DE LOS CRISTALES CALI">
+<area shape="rect" coords="375, 9, 744, 186" href="Page587.html" target='_parent' alt="CONSERVACIÓN DE LOS ECOPARQUES PARA EL FORTALECIMIENTO DE LA EDUCACIÓN AMBIENTAL EN EL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="394, 198, 744, 402" href="Page616.html" target='_parent' alt="IMPLEMENTACIÓN DE ESTRATEGIAS PARA CONSERVACION  DE ECOSISTEMAS EN CUENCAS ABASTECEDORAS DE AGUA   - ARTICULO 111 LEY 99/93 SANTIAGO DE CALI">
+<area shape="rect" coords="376, 414, 744, 603" href="Page640.html" target='_parent' alt="IMPLEMENTACIÓN DE OBRAS DE MANEJO, CONTROL Y  REGULACIÓN HIDRAULICA DE LA RED DE ACEQUIAS Y DRENAJE PLUVIAL DE LA  COMUNA 22 SANTIAGO DE CALI">
+<area shape="rect" coords="377, 615, 744, 789" href="Page648.html" target='_parent' alt="IMPLEMENTACIÓN DEL CORREDOR AMBIENTAL PARA EL FOMENTO DE LA EDUCACIÓN Y RECREACIÓN EN LA COMUNA 22 DE SANTIAGO DE CALI">
+<area shape="rect" coords="381, 801, 744, 945" href="Page655.html" target='_parent' alt="RECUPERACIÓN AMBIENTAL DE  ECOSISTEMAS DE HUMEDAL EN SANTIAGO DE CALI">
+<area shape="rect" coords="376, 1957, 744, 2131" href="Page675.html" target='_parent' alt="RESTAURACIÓN DE ECOSISTEMAS  DE BOSQUES  DE CUENCAS HIDROGRAFICAS DEL MUNICIPIO DE  SANTIAGO DE CALI">
+<area shape="rect" coords="375, 9, 744, 186" href="Page587.html" target='_parent' alt="CONSERVACIÓN DE LOS ECOPARQUES PARA EL FORTALECIMIENTO DE LA EDUCACIÓN AMBIENTAL EN EL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="394, 198, 744, 402" href="Page616.html" target='_parent' alt="IMPLEMENTACIÓN DE ESTRATEGIAS PARA CONSERVACION  DE ECOSISTEMAS EN CUENCAS ABASTECEDORAS DE AGUA   - ARTICULO 111 LEY 99/93 SANTIAGO DE CALI">
+<area shape="rect" coords="376, 414, 744, 603" href="Page640.html" target='_parent' alt="IMPLEMENTACIÓN DE OBRAS DE MANEJO, CONTROL Y  REGULACIÓN HIDRAULICA DE LA RED DE ACEQUIAS Y DRENAJE PLUVIAL DE LA  COMUNA 22 SANTIAGO DE CALI">
+<area shape="rect" coords="377, 615, 744, 789" href="Page648.html" target='_parent' alt="IMPLEMENTACIÓN DEL CORREDOR AMBIENTAL PARA EL FOMENTO DE LA EDUCACIÓN Y RECREACIÓN EN LA COMUNA 22 DE SANTIAGO DE CALI">
+<area shape="rect" coords="381, 801, 744, 945" href="Page655.html" target='_parent' alt="RECUPERACIÓN AMBIENTAL DE  ECOSISTEMAS DE HUMEDAL EN SANTIAGO DE CALI">
+<area shape="rect" coords="396, 1434, 744, 1594" href="Page667.html" target='_parent' alt="RECUPERACIÓN DE LA OFERTA DE   BIENES Y SERVICIOS AMBIENTALES DEL CERRO DE LOS CRISTALES CALI">
+<area shape="rect" coords="376, 1957, 744, 2131" href="Page675.html" target='_parent' alt="RESTAURACIÓN DE ECOSISTEMAS  DE BOSQUES  DE CUENCAS HIDROGRAFICAS DEL MUNICIPIO DE  SANTIAGO DE CALI">
+<area shape="rect" coords="764, 1007, 1145, 1133" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

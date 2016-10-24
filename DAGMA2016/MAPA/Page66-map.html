@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page66-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="810, 336, 1118, 459" href="Page67.html" target='_parent' alt="ERRADICAR ESPECIES ARBÓREAS ENTRE 6,1 A 12 METROS DEL ALTURA">
+<area shape="rect" coords="810, 471, 1126, 610" href="Page68.html" target='_parent' alt="REALIZAR ESTABLECIMIENTO ADECUADO DE ESPECIES ARBÓREAS POR COMPENSACIÓN">
+<area shape="rect" coords="810, 621, 1085, 760" href="Page69.html" target='_parent' alt="REALIZAR INTERVENTORÍA A LA ERRADICACIÓN DE ESPECIES ARBÓREAS">
+<area shape="rect" coords="810, 772, 1088, 925" href="Page70.html" target='_parent' alt="REALIZAR INTERVENTORÍA A LA SIEMBRA Y MANTENIMIENTO DE ESPECIES ARBÓREAS POR COMPENSACIÓN">
+<area shape="rect" coords="810, 937, 1079, 1061" href="Page71.html" target='_parent' alt="REALIZAR INTERVENTORÍA AL MANTENIMIENTO DE ESPECIES">
+<area shape="rect" coords="810, 1073, 1128, 1211" href="Page72.html" target='_parent' alt="REALIZAR MANTENIMIENTO DE ESPECIES ARBÓREAS ESTABLECIDAS POR COMPENSACIÓN">
+<area shape="rect" coords="810, 1223, 1123, 1362" href="Page73.html" target='_parent' alt="REALIZAR PODA DE ESPECIES ARBÓREAS ENTRE 12,1 A 18 METROS DE">
+<area shape="rect" coords="810, 1373, 972, 1482" href="Page74.html" target='_parent' alt="ALTURA">
+<area shape="rect" coords="810, 1494, 1115, 1632" href="Page75.html" target='_parent' alt="REALIZAR PODA DE ESPECIES ARBÓREAS ENTRE 6,1 A 12 METROS DE">
+<area shape="rect" coords="810, 1644, 972, 1753" href="Page76.html" target='_parent' alt="ALTURA">
+<area shape="rect" coords="442, 8, 809, 185" href="Page57.html" target='_parent' alt="CONTROL Y MANEJO DE LA HORMIGA ARRIERA EN LAS ZONAS VERDES PUBLICAS DE LAS 22 COMUNAS DE  SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1765, 814, 1924" href="Page77.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE ZONAS VERDES Y SEPARADORES VIALES DE LAS 22 COMUNAS DE LA CIUDAD DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1936, 818, 2080" href="Page100.html" target='_parent' alt="MEJORAMIENTO DE LA COBERTURA ÁRBOREA DE LAS 22 COMUNAS  DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 2092, 813, 2266" href="Page112.html" target='_parent' alt="REFORESTACION PLANTACION Y RENOVACION ARBOREA URBANA &quot;NATURALIZANDO A CALI 2012-2015&quot; LAS 22 COMUNAS DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 8, 809, 185" href="Page57.html" target='_parent' alt="CONTROL Y MANEJO DE LA HORMIGA ARRIERA EN LAS ZONAS VERDES PUBLICAS DE LAS 22 COMUNAS DE  SANTIAGO DE CALI">
+<area shape="rect" coords="442, 958, 790, 1117" href="Page65.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE LA COBERTURA ARBOREA Y FITOSANITARIO DE LA COMUNA 19 DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1765, 814, 1924" href="Page77.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE ZONAS VERDES Y SEPARADORES VIALES DE LAS 22 COMUNAS DE LA CIUDAD DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1936, 818, 2080" href="Page100.html" target='_parent' alt="MEJORAMIENTO DE LA COBERTURA ÁRBOREA DE LAS 22 COMUNAS  DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 2092, 813, 2266" href="Page112.html" target='_parent' alt="REFORESTACION PLANTACION Y RENOVACION ARBOREA URBANA &quot;NATURALIZANDO A CALI 2012-2015&quot; LAS 22 COMUNAS DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="9, 1074, 422, 1200" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

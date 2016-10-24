@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page61-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="820, 9, 1134, 150" href="Page58.html" target='_parent' alt="INTERVENTORIA DE  ACTIVIDADES DEL PROYECTO CONTROL Y MANEJO HORMIGA  ARRIERA EN  10 COMUNAS">
+<area shape="rect" coords="820, 162, 1132, 346" href="Page59.html" target='_parent' alt="ORGANIZAR LA RED DE OBSERVADORES Y ENCARGADA DE LAS VISITAS A ESCUELAS, REUNIONES CON LOS ACTORES DIRECTOS QUE CONFPRMAN LA RED DE OBSERVADORES.">
+<area shape="rect" coords="820, 358, 1121, 511" href="Page60.html" target='_parent' alt="REALIZACIÓN DE LAS VISITAS DE CAMPO PARA LA CARACTERIZACIÓNDE LA HORMIGA ARRIERA">
+<area shape="rect" coords="820, 674, 1135, 902" href="Page62.html" target='_parent' alt="REALIZAR EL ESTUDIO DE GEORREFERENCIACIÓN CON GPS DE LOS NIDOS DE HORMIGA ARRIERA EN LAS ZONAS ESPECIFICADAS   ,MEDICIÓN DE ÁREAS, INVENTARIO  , REGISTRO FOTOGRÁFICO DE LA ACTIVIDAD Y MAPA  DE  UBICACIÓN  EN LAS  10 COMUNAS INVOLUCRADAS.">
+<area shape="rect" coords="820, 914, 1109, 1067" href="Page63.html" target='_parent' alt="REALIZAR LA INTERVENTORIA DE  ACTIVIDADES DEL PROYECTO CONTROL Y MANEJO HORMIGA  ARRIERA EN  10 COMUNAS">
+<area shape="rect" coords="820, 1079, 1120, 1233" href="Page64.html" target='_parent' alt="SUMINISTRAR LOS IMPLEMENTOS NECESARIOS PARA LA CARACTERIZACIÓNDE LA HORMIGA ARRIERA">
+<area shape="rect" coords="442, 1245, 799, 1404" href="Page65.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE LA COBERTURA ARBOREA Y FITOSANITARIO DE LA COMUNA 19 DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1416, 814, 1575" href="Page77.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE ZONAS VERDES Y SEPARADORES VIALES DE LAS 22 COMUNAS DE LA CIUDAD DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1587, 818, 1731" href="Page100.html" target='_parent' alt="MEJORAMIENTO DE LA COBERTURA ÁRBOREA DE LAS 22 COMUNAS  DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1743, 813, 1917" href="Page112.html" target='_parent' alt="REFORESTACION PLANTACION Y RENOVACION ARBOREA URBANA &quot;NATURALIZANDO A CALI 2012-2015&quot; LAS 22 COMUNAS DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 603, 800, 780" href="Page57.html" target='_parent' alt="CONTROL Y MANEJO DE LA HORMIGA ARRIERA EN LAS ZONAS VERDES PUBLICAS DE LAS 22 COMUNAS DE  SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1245, 799, 1404" href="Page65.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE LA COBERTURA ARBOREA Y FITOSANITARIO DE LA COMUNA 19 DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1416, 814, 1575" href="Page77.html" target='_parent' alt="MANTENIMIENTO INTEGRAL DE ZONAS VERDES Y SEPARADORES VIALES DE LAS 22 COMUNAS DE LA CIUDAD DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1587, 818, 1731" href="Page100.html" target='_parent' alt="MEJORAMIENTO DE LA COBERTURA ÁRBOREA DE LAS 22 COMUNAS  DE SANTIAGO DE CALI">
+<area shape="rect" coords="442, 1743, 813, 1917" href="Page112.html" target='_parent' alt="REFORESTACION PLANTACION Y RENOVACION ARBOREA URBANA &quot;NATURALIZANDO A CALI 2012-2015&quot; LAS 22 COMUNAS DEL MUNICIPIO DE SANTIAGO DE CALI">
+<area shape="rect" coords="9, 900, 422, 1026" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

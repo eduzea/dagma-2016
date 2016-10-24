@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page565-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="8, 8, 328, 132" href="Page556.html" target='_parent' alt="Identificar y priorizar  las zonas con mayor problematica por ruido .">
+<area shape="rect" coords="11, 144, 328, 282" href="Page557.html" target='_parent' alt="Adquirir equipos de transporte y tecnologicos  para ejecucion de visitas de control de impactos ambientales.">
+<area shape="rect" coords="24, 294, 328, 418" href="Page558.html" target='_parent' alt="Adquirir equipos para la automatización del monitoreo de ruido ambiental.">
+<area shape="rect" coords="25, 430, 328, 583" href="Page559.html" target='_parent' alt="Adquirir los insumos y elementos requeridos en los procesos de control y seguimiento a los establecimientos de comercio.">
+<area shape="rect" coords="10, 595, 328, 764" href="Page560.html" target='_parent' alt="Desarrollar las Capacitaciones en materia de ruido, dirigidas a las empresas del sector comercial y de servicios, gremios, instituciones educativas y comunidad en general.">
+<area shape="rect" coords="14, 775, 328, 914" href="Page561.html" target='_parent' alt="Elaborar Estudios de simulación acústica y mapas estrategicos, en las areas priorizadas.">
+<area shape="rect" coords="31, 926, 328, 1064" href="Page562.html" target='_parent' alt="Evaluar y monitorear los impactos ambientales originados  por las actividades comerciales y de servicios.">
+<area shape="rect" coords="29, 1076, 328, 1230" href="Page563.html" target='_parent' alt="Gestionar la información de la red de monitoreo de ruido y demás equipos articulados al sistema de monitoreo de ruido ambiental.">
+<area shape="rect" coords="12, 1242, 328, 1380" href="Page564.html" target='_parent' alt="Realizar  revisión técnica, mantenimiento y reparación de  equipos empleados para las  mediciones  de presión sonora.">
+<area shape="rect" coords="21, 1543, 328, 1711" href="Page566.html" target='_parent' alt="Realizar Estudio Piloto para evaluación de las afectaciones en la salud de las personas expuestas en zonas con altos niveles de ruido ambiental, en las zonas priorizadas.">
+<area shape="rect" coords="15, 1723, 328, 1861" href="Page567.html" target='_parent' alt="Realizar evaluacion y seguimiento  a los impactos  por ruido generados durante el desarrollo de  eventos masivos.">
+<area shape="rect" coords="348, 909, 702, 1083" href="Page555.html" target='_parent' alt="CONTROL  DE IMPACTOS AMBIENTALES POR RUIDO, EMISIONES Y VERTIMIENTOS DE PEQUEÑOS ESTABLECIMIENTOS DE CALI">
+<area shape="rect" coords="722, 872, 1096, 998" href="Page554.html" target='_parent' alt="RUIDO">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page168-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="1151, 766, 1524, 929" href="Page169.html" target='_parent' alt="CONTROL Y SEGUIMIENTO  A LA GESTION DE LOS RESIDUOS PELIGROSOS - RESPEL EN LAS 22 COMUNAS DE  SANTIAGO DE CALI">
+<area shape="rect" coords="1151, 940, 1523, 1145" href="Page180.html" target='_parent' alt="FORTALECIMIENTO DE LA GESTION AMBIENTAL URBANA DE VIGILANCIA Y CONTROL DE LA CONTAMINACION AMBIEN TAL GENERADA POR EL SECTOR EMPRESARIAL DE LA CIUDAD DE CALI">
+<area shape="rect" coords="757, 8, 1123, 137" href="Page2.html" target='_parent' alt="ADMINISTRATIVO">
+<area shape="rect" coords="757, 162, 1148, 288" href="Page7.html" target='_parent' alt="AGUAS">
+<area shape="rect" coords="757, 313, 1180, 439" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+<area shape="rect" coords="757, 464, 1130, 590" href="Page117.html" target='_parent' alt="AIRE">
+<area shape="rect" coords="757, 615, 1130, 741" href="Page145.html" target='_parent' alt="FAUNA">
+<area shape="rect" coords="757, 1170, 1148, 1296" href="Page200.html" target='_parent' alt="PARQUES">
+<area shape="rect" coords="16, 1042, 399, 1168" href="Page413.html" target='_parent' alt="PLANEACION">
+<area shape="rect" coords="16, 891, 399, 1017" href="Page453.html" target='_parent' alt="RESIDUOS">
+<area shape="rect" coords="26, 740, 399, 866" href="Page483.html" target='_parent' alt="RIESGO">
+<area shape="rect" coords="16, 589, 399, 715" href="Page554.html" target='_parent' alt="RUIDO">
+<area shape="rect" coords="16, 438, 399, 564" href="Page568.html" target='_parent' alt="SENTENCIA">
+<area shape="rect" coords="8, 287, 399, 413" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+<area shape="rect" coords="16, 136, 399, 262" href="Page696.html" target='_parent' alt="EDUCACION">
+<area shape="rect" coords="757, 8, 1123, 137" href="Page2.html" target='_parent' alt="ADMINISTRATIVO">
+<area shape="rect" coords="757, 162, 1148, 288" href="Page7.html" target='_parent' alt="AGUAS">
+<area shape="rect" coords="757, 313, 1180, 439" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+<area shape="rect" coords="757, 464, 1130, 590" href="Page117.html" target='_parent' alt="AIRE">
+<area shape="rect" coords="757, 615, 1130, 741" href="Page145.html" target='_parent' alt="FAUNA">
+<area shape="rect" coords="757, 1170, 1148, 1296" href="Page200.html" target='_parent' alt="PARQUES">
+<area shape="rect" coords="16, 1042, 399, 1168" href="Page413.html" target='_parent' alt="PLANEACION">
+<area shape="rect" coords="16, 891, 399, 1017" href="Page453.html" target='_parent' alt="RESIDUOS">
+<area shape="rect" coords="26, 740, 399, 866" href="Page483.html" target='_parent' alt="RIESGO">
+<area shape="rect" coords="16, 589, 399, 715" href="Page554.html" target='_parent' alt="RUIDO">
+<area shape="rect" coords="16, 438, 399, 564" href="Page568.html" target='_parent' alt="SENTENCIA">
+<area shape="rect" coords="8, 287, 399, 413" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+<area shape="rect" coords="16, 136, 399, 262" href="Page696.html" target='_parent' alt="EDUCACION">
+<area shape="rect" coords="414, 582, 742, 722" href="index.html" target='_parent' alt="Presupuesto DAGMA 2016">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

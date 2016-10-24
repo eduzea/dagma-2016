@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page585-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="10, 183, 319, 324" href="Page583.html" target='_parent' alt="ACTIVIDADES LÚDICAS DE LIMPIEZA DE LAS QUEBRADAS LA MINA, EL VALE EN SUS CAUCES">
+<area shape="rect" coords="58, 336, 319, 445" href="Page584.html" target='_parent' alt="REALIZAR LA INTERVENTORIA">
+<area shape="rect" coords="360, 9, 701, 171" href="Page569.html" target='_parent' alt="IMPLEMENTACION DE  RUTA SELECTIVA EN SANTIAGO DE CALI CON INCLUSION DE RECICLADORES DE OFICIO">
+<area shape="rect" coords="360, 9, 701, 171" href="Page569.html" target='_parent' alt="IMPLEMENTACION DE  RUTA SELECTIVA EN SANTIAGO DE CALI CON INCLUSION DE RECICLADORES DE OFICIO">
+<area shape="rect" coords="339, 387, 701, 531" href="Page582.html" target='_parent' alt="RECUPERAR LOS CAUCES DE LAS QUEBRADAS DE LA COMUNA 20">
+<area shape="rect" coords="721, 239, 1095, 365" href="Page568.html" target='_parent' alt="SENTENCIA">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

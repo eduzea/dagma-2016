@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page2-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="1133, 16, 1434, 130" href="Page3.html" target='_parent' alt="Generico">
+<area shape="rect" coords="757, 163, 1148, 288" href="Page7.html" target='_parent' alt="AGUAS">
+<area shape="rect" coords="757, 314, 1180, 439" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+<area shape="rect" coords="757, 465, 1130, 590" href="Page117.html" target='_parent' alt="AIRE">
+<area shape="rect" coords="757, 616, 1130, 741" href="Page145.html" target='_parent' alt="FAUNA">
+<area shape="rect" coords="757, 767, 1140, 892" href="Page168.html" target='_parent' alt="GAE">
+<area shape="rect" coords="757, 918, 1148, 1043" href="Page200.html" target='_parent' alt="PARQUES">
+<area shape="rect" coords="16, 916, 399, 1042" href="Page413.html" target='_parent' alt="PLANEACION">
+<area shape="rect" coords="16, 765, 399, 891" href="Page453.html" target='_parent' alt="RESIDUOS">
+<area shape="rect" coords="26, 614, 399, 740" href="Page483.html" target='_parent' alt="RIESGO">
+<area shape="rect" coords="16, 463, 399, 589" href="Page554.html" target='_parent' alt="RUIDO">
+<area shape="rect" coords="16, 312, 399, 438" href="Page568.html" target='_parent' alt="SENTENCIA">
+<area shape="rect" coords="8, 161, 399, 287" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+<area shape="rect" coords="16, 10, 399, 136" href="Page696.html" target='_parent' alt="EDUCACION">
+<area shape="rect" coords="757, 163, 1148, 288" href="Page7.html" target='_parent' alt="AGUAS">
+<area shape="rect" coords="757, 314, 1180, 439" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+<area shape="rect" coords="757, 465, 1130, 590" href="Page117.html" target='_parent' alt="AIRE">
+<area shape="rect" coords="757, 616, 1130, 741" href="Page145.html" target='_parent' alt="FAUNA">
+<area shape="rect" coords="757, 767, 1140, 892" href="Page168.html" target='_parent' alt="GAE">
+<area shape="rect" coords="757, 918, 1148, 1043" href="Page200.html" target='_parent' alt="PARQUES">
+<area shape="rect" coords="16, 916, 399, 1042" href="Page413.html" target='_parent' alt="PLANEACION">
+<area shape="rect" coords="16, 765, 399, 891" href="Page453.html" target='_parent' alt="RESIDUOS">
+<area shape="rect" coords="26, 614, 399, 740" href="Page483.html" target='_parent' alt="RIESGO">
+<area shape="rect" coords="16, 463, 399, 589" href="Page554.html" target='_parent' alt="RUIDO">
+<area shape="rect" coords="16, 312, 399, 438" href="Page568.html" target='_parent' alt="SENTENCIA">
+<area shape="rect" coords="8, 161, 399, 287" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+<area shape="rect" coords="16, 10, 399, 136" href="Page696.html" target='_parent' alt="EDUCACION">
+<area shape="rect" coords="414, 456, 742, 596" href="index.html" target='_parent' alt="Presupuesto DAGMA 2016">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>

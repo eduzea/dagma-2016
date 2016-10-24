@@ -1,0 +1,71 @@
+/* Cascading Style Sheet for HTML export */
+
+/* MODULE: WEB PRESENTATION */
+/* AQUA GREEN */
+
+/* This stylesheet expects the following HTML structure
+		  
+Header page:
+		table#WpNavigation
+			td.wpnavigationleft
+				span.wpbreadcrumb
+			td.wpnavigationright
+			   span.commands
+					span.wpcommand
+*/
+
+.wpnavigation {
+	margin: 0px;	
+	padding: 0px;	
+	width:  100%;
+	height: 3em;
+	background-color: Gray;
+	color: white;
+}
+
+.wpnavigation a:link {
+	color: White;
+}
+
+.wpnavigation  a:visited {
+	color: White;
+}
+
+.wpnavigation  a:hover {
+   color: #CCFFFF;
+}
+
+.wpnavigation  a:active {
+	color: #CCFFFF;
+}
+
+.wpnavigationleft {
+	text-align : left;
+	vertical-align: top;
+	width:  90%;
+	text-indent: 10px;
+}
+
+.wpbreadcrumb {
+	font-weight : bold;
+	font-size : 11px;
+}
+
+.wpnavigationright {
+	width: 10%;
+	text-align : right;
+	vertical-align: top;
+	white-space : nowrap;
+}
+
+.wpnavigationright .commands {
+	margin-right: 20px;
+}
+
+.wpcommand {
+	font-weight : bold;
+	font-size : 11px;
+}
+
+
+

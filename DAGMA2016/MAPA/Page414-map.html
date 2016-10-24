@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- The XHTML header is needed here. Otherwise the panning of our images doesn't work -->
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+   <title>Map Content</title>
+   <link href="Res/styles/shared.css" rel="stylesheet" type="text/css" />
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/shared.js"></script>
+   <script language="JavaScript" type="text/JavaScript" src="Res/code/mapController.js"></script>
+   <script language="JavaScript" type="text/JavaScript">
+      function init() {
+      	mapController = new MapController(parent.topFrame,2);	// setup controller; will control map image in sibling frame, mainFrame
+      	mapController.addMapImage("mapOverview",200,200);		// image index 0
+      	mapController.init(0);
+      }
+   </script>
+
+</head>
+<body class="overviewMapBody" onload="init();">
+<div class="overviewDiv">
+
+<table height="100%" align="center" halign="center">
+<tr>
+<td>
+
+<!-- OVERVIEW IMAGE MAP -->
+  <img id="mapOverview" 
+      src="Page414-img.jpg" 
+      usemap="#Topic_CSIM">
+
+<map name="Topic_CSIM">
+<area shape="rect" coords="8, 914, 210, 1023" href="Page415.html" target='_parent' alt="Rem. Serv. tecnicos">
+<area shape="rect" coords="163, 1093, 528, 1237" href="Page416.html" target='_parent' alt="IMPLEMENTACIÓN DEL OBSERVATORIO AMBIENTAL DEL MUNICIPIO SANTIAGO DE CALI">
+<area shape="rect" coords="173, 1249, 528, 1408" href="Page424.html" target='_parent' alt="MEJORAMIENTO DE LOS PROCESOS OPERATIVOS Y ADMINISTRATIVOS DEL DAGMA SANTIAGO DE CALI">
+<area shape="rect" coords="163, 1093, 528, 1237" href="Page416.html" target='_parent' alt="IMPLEMENTACIÓN DEL OBSERVATORIO AMBIENTAL DEL MUNICIPIO SANTIAGO DE CALI">
+<area shape="rect" coords="173, 1249, 528, 1408" href="Page424.html" target='_parent' alt="MEJORAMIENTO DE LOS PROCESOS OPERATIVOS Y ADMINISTRATIVOS DEL DAGMA SANTIAGO DE CALI">
+<area shape="rect" coords="1280, 191, 1646, 319" href="Page2.html" target='_parent' alt="ADMINISTRATIVO">
+<area shape="rect" coords="1280, 345, 1671, 470" href="Page7.html" target='_parent' alt="AGUAS">
+<area shape="rect" coords="1280, 496, 1703, 621" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+<area shape="rect" coords="1280, 647, 1653, 772" href="Page117.html" target='_parent' alt="AIRE">
+<area shape="rect" coords="1280, 798, 1653, 923" href="Page145.html" target='_parent' alt="FAUNA">
+<area shape="rect" coords="1280, 949, 1663, 1074" href="Page168.html" target='_parent' alt="GAE">
+<area shape="rect" coords="1280, 1100, 1671, 1225" href="Page200.html" target='_parent' alt="PARQUES">
+<area shape="rect" coords="539, 763, 922, 889" href="Page453.html" target='_parent' alt="RESIDUOS">
+<area shape="rect" coords="549, 612, 922, 738" href="Page483.html" target='_parent' alt="RIESGO">
+<area shape="rect" coords="539, 461, 922, 587" href="Page554.html" target='_parent' alt="RUIDO">
+<area shape="rect" coords="539, 310, 922, 436" href="Page568.html" target='_parent' alt="SENTENCIA">
+<area shape="rect" coords="531, 159, 922, 285" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+<area shape="rect" coords="539, 8, 922, 134" href="Page696.html" target='_parent' alt="EDUCACION">
+<area shape="rect" coords="1280, 191, 1646, 319" href="Page2.html" target='_parent' alt="ADMINISTRATIVO">
+<area shape="rect" coords="1280, 345, 1671, 470" href="Page7.html" target='_parent' alt="AGUAS">
+<area shape="rect" coords="1280, 496, 1703, 621" href="Page56.html" target='_parent' alt="ARBORIZACION ZONAS VERDES">
+<area shape="rect" coords="1280, 647, 1653, 772" href="Page117.html" target='_parent' alt="AIRE">
+<area shape="rect" coords="1280, 798, 1653, 923" href="Page145.html" target='_parent' alt="FAUNA">
+<area shape="rect" coords="1280, 949, 1663, 1074" href="Page168.html" target='_parent' alt="GAE">
+<area shape="rect" coords="1280, 1100, 1671, 1225" href="Page200.html" target='_parent' alt="PARQUES">
+<area shape="rect" coords="548, 1098, 922, 1224" href="Page413.html" target='_parent' alt="PLANEACION">
+<area shape="rect" coords="539, 763, 922, 889" href="Page453.html" target='_parent' alt="RESIDUOS">
+<area shape="rect" coords="549, 612, 922, 738" href="Page483.html" target='_parent' alt="RIESGO">
+<area shape="rect" coords="539, 461, 922, 587" href="Page554.html" target='_parent' alt="RUIDO">
+<area shape="rect" coords="539, 310, 922, 436" href="Page568.html" target='_parent' alt="SENTENCIA">
+<area shape="rect" coords="531, 159, 922, 285" href="Page586.html" target='_parent' alt="ECOSISTEMAS">
+<area shape="rect" coords="539, 8, 922, 134" href="Page696.html" target='_parent' alt="EDUCACION">
+<area shape="rect" coords="937, 638, 1265, 778" href="index.html" target='_parent' alt="Presupuesto DAGMA 2016">
+</map>
+
+</td>
+</tr>
+</table>
+
+</div>
+</body>
+</html>
