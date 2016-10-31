@@ -46,12 +46,11 @@ var valueField = "PTTO ACTIVIDAD";
 var valueFields = ["PTTO ACTIVIDAD","EJECUCION","CDP","DISPONIBLE","% EJECUCION"];
 
 
-
 var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(",.0f")(d); };
 
 function loadData() {
 
-    d3.csv("data/BANCO2016.csv", function (csv) {
+	d3.csv("data/BANCO2016.csv", function (csv) {
 
         data.values=prepData(csv);
 
@@ -77,9 +76,12 @@ function prepData(csv) {
     })
 
     //Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
-    var nest = d3.nest()
+     var nest = d3.nest()
         .key(function (d) {
             return d.AREA;
+        })
+        .key(function (d) {
+            return d.NOMBRE_AREA_FUNCIONAL;
         })
         .key(function (d) {
             return d.NOMBRE_PROYECTO;
@@ -128,7 +130,7 @@ function initialize() {
     //Here we create three vizuly themes for each radial progress component.
     //A theme manages the look and feel of the component output.  You can only have
     //one component active per theme, so we bind each theme to the corresponding component.
-    theme = vizuly.theme.weighted_tree(viz).skin(vizuly.skin.WEIGHTED_TREE_AXIIS);
+    theme = vizuly.theme.weighted_tree(viz).skin(vizuly.skin.WEIGHTED_TREE_TRAFFICLIGHT);
 
     //Like D3 and jQuery, vizuly uses a function chaining syntax to set component properties
     //Here we set some bases line properties for all three components.
@@ -148,9 +150,13 @@ function initialize() {
         .on("click",onClick);                                           // mouseout callback - all viz components issue these events
 
 
-    //We use this function to size the components
+    //We use this function to size the components based on the selected value from the RadiaLProgressTest.html page.
     changeSize("1082,750");
 
+    // Open up some of the tree branches.
+//    viz.toggleNode(data.values[2]);
+//    viz.toggleNode(data.values[2].values[0]);
+//    viz.toggleNode(data.values[3]);
 
 }
 
@@ -161,21 +167,39 @@ function trimLabel(label) {
 
 
 var datatip='<div class="tooltip" style="width: 250px; background-opacity:.5">' +
-    '<div class="header1">HEADER1</div>' +
-    '<div class="header-rule"></div>' +
-    '<div class="header2"> HEADER2 </div>' +
-    '<div class="header-rule"></div>' +
-    '<div class="header3"> HEADER3 </div>' +
-    '</div>';
+	'<div class="header3">ACTIVIDAD</div> ' +
+	'<div class="header-rule"></div>' +
+	'<div class="header-rule"></div>' +
+	'<div class="header1">PRESUPUESTO: VAL_PRESUPUESTO</div> ' +
+	'<div class="header-rule"></div>' +
+	'<div class="header1">EJECUTADO: VAL_EJECUTADO</div>' +
+	'<div class="header-rule"></div>' +
+	'<div class="header1">CDP: VAL_CDP</div>' +
+	'<div class="header-rule"></div>' +
+	'<div class="header1">DISPONIBLE: VAL_DISPONIBLE</div>' +
+	'<div class="header-rule"></div>' +
+	'<div class="header1">% EJECUCION: VAL_% EJECUCION</div>' +
+	'</div>';
 
 
 // This function uses the above html template to replace values and then creates a new <div> that it appends to the
 // document.body.  This is just one way you could implement a data tip.
-function createDataTip(x,y,h1,h2,h3) {
+function createDataTip(x,y,d) {
 
-    var html = datatip.replace("HEADER1", h1);
-    html = html.replace("HEADER2", h2);
-    html = html.replace("HEADER3", h3);
+	var presupuesto = d["agg_" + "PTTO ACTIVIDAD"];
+	var ejecutado = d["agg_" + "EJECUCION"];
+	var cdp = d["agg_" + "CDP"];
+	var disponible = d["agg_" + "DISPONIBLE"];
+	var pctEjecucion = Math.round(100.0 * d["agg_" + "EJECUCION"] / d["agg_" + "PTTO ACTIVIDAD"]) + "%"
+
+	
+    var html = datatip.replace("ACTIVIDAD", d.key);
+    html = html.replace("VAL_PRESUPUESTO", formatCurrency(presupuesto));
+    html = html.replace("VAL_EJECUTADO", formatCurrency(ejecutado));
+    html = html.replace("VAL_CDP", formatCurrency(cdp));
+    html = html.replace("VAL_DISPONIBLE", formatCurrency(disponible));
+    html = html.replace("VAL_EJECUTADO", formatCurrency(ejecutado));
+    html = html.replace("VAL_% EJECUCION", pctEjecucion);
 
     d3.select("body")
         .append("div")
@@ -198,7 +222,7 @@ function onMouseOver(e,d,i) {
     if (d == data) return;
     var rect = e.getBoundingClientRect();
     if (d.target) d = d.target; //This if for link elements
-    createDataTip(rect.left, rect.top, (d.key || (d['Level' + d.depth])), formatCurrency(d["agg_" + valueField]),valueField);
+    createDataTip(rect.left, rect.top, d);
 
 
 }

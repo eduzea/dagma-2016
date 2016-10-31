@@ -39,6 +39,40 @@ vizuly.theme.weighted_tree = function (viz) {
             },
             font_size: function () { return fontSize + "px"; }
         },
+        "TrafficLight" : {
+            name: "TrafficLight",                          // Skin Name
+            label_color: "#333",                    // Color of the center label
+            link_colors: ["#FFFF00",//Yellow
+                          "#FF0000",//Red
+                          "#00FF00"//Green
+                          ],
+            link_stroke: function (d, i) {
+                return trafficLight(d.target);
+            },
+            link_stroke_opacity: function (d,i) {
+                if (viz.value()(d.target) <= 0 ) return .15;
+                return .35;                           // Dynamic function that returns opacity (in this case it is 1, but the WHITE skin uses a dynamic opacity
+            },
+            node_fill: function (d, i) {
+                return trafficLight(d);
+            },
+            node_fill_opacity: function (d, i) {
+                if (viz.value()(d) <= 0 ) return .15;
+                return .4;
+            },
+            node_stroke: function (d, i) {
+                return d.vz_link_color;
+            },
+            node_stroke_opacity: function (d, i) {
+                return .6;
+            },
+            text_fill_opacity: function (d,i) {
+                if (viz.value()(d) <= 0 ) return .35;
+                return 1;
+            },
+            font_size: function () { return fontSize + "px"; }
+        },
+
         "None" : {
             name: "None",                          // Skin Name
             label_color: null,                    // Color of the center label
@@ -68,6 +102,19 @@ vizuly.theme.weighted_tree = function (viz) {
             },
             font_size: function() { return null; }
         }
+    }
+    
+    trafficLight = function(d){
+    	var pct_ejecucion = d['agg_EJECUCION'] / d['agg_PTTO ACTIVIDAD']; 
+    	if (pct_ejecucion < 0.5){
+    		return "#FF0000";
+    	}
+    	else if(pct_ejecucion < 0.75){
+    		return "#FFFF00";
+    	}else{
+    		return "#00FF00"
+    	}
+    	
     }
 
     // This is the **viz** we will be styling.
@@ -108,7 +155,10 @@ vizuly.theme.weighted_tree = function (viz) {
         selection.selectAll(".vz-weighted_tree-node circle")
             .style("stroke",function (d) { return skin.node_stroke(d) })
             .style("stroke-opacity",function (d) { return skin.node_stroke_opacity(d) })
-            .style("fill",function (d) { return skin.node_fill(d) })
+            .style("fill",
+            		function (d) { 
+            	return skin.node_fill(d)
+            	})
             .style("fill-opacity", function (d) { return skin.node_fill_opacity(d)});
 
         selection.selectAll(".vz-weighted_tree-node text")
@@ -124,6 +174,7 @@ vizuly.theme.weighted_tree = function (viz) {
     }
 
     function prepColorData() {
+
         if (!skin || !viz.data()) return;
 
         var nodes = viz.data();
@@ -254,6 +305,7 @@ vizuly.theme.weighted_tree = function (viz) {
 
 // We keep our skins declared as **constants** so we can easily reference them in other functions
 vizuly.skin.WEIGHTED_TREE_AXIIS = "Axiis";
+vizuly.skin.WEIGHTED_TREE_TRAFFICLIGHT = "TrafficLight";
 
 
 // And that is pretty much it.  This is a pretty simple theme, some of the other vizuly components implement more
