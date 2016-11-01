@@ -1,7 +1,8 @@
 require(["d3/d3","dojo/store/Memory","dijit/tree/ObjectStoreModel","dijit/Tree",'dojo/dom',"dijit/registry","dojo/ready","dojo/domReady!"],
 function(d3,Memory,Model,Tree,dom,registry,ready)
 {
-ready(function(){	
+ready(function(){
+	dagma = {};//dagma especific namespace
 	var valueFields = ["PTTO ACTIVIDAD","EJECUCION","CDP","DISPONIBLE","% EJECUCION"];
 	var data ={};
 	d3.csv("weightedtree/weightedtree/data/BANCO2016.csv", function(csv){
@@ -11,17 +12,17 @@ ready(function(){
 	
 	var formatNode = function(node, parent, isLeaf){
 		return {
-			id: node.key, //default to a simple node string
+			id: node.id, //default to a simple node string
 			name: node.key,
 			parent: parent,
-			clickable: isLeaf ? false : true
+			clickable: true
 		}
 	}
 	
 	var createNode = function(node,parent,nodes){
 		if (node.values.length > 0){
 			nodes.push(formatNode(node,parent,false))
-			parent = node.key;
+			parent = node.id;
 			node.values.forEach(function(n){
 				createNode(n,parent,nodes)
 			})
@@ -63,7 +64,19 @@ ready(function(){
 	    
 	    tree.onOpen = function(item,node){
 			registry.byId('layout').resize();
-		};		
+		};
+		
+		tree.onClick = function(item, node, evt){
+			if (!item.clickable) return;
+		    var indices = item.id.split("_")
+		    var theNode = dagma.data;
+		    for (var i = 1; i < indices.length; i++){//0 is the root node
+		    	theNode = theNode.values[indices[i]];
+		    	viz.toggleNode(theNode);
+		    }
+		    viz.toggleNode(theNode);
+		};
+
 	}
 
 	var prepData =  function(csv) {
@@ -115,30 +128,6 @@ ready(function(){
 		    return nest;
 		};
 		
-		tree.onClick = function(item, node, evt){
-			if (!item.clickable) return;
-//			var entityClass = item.id;
-//			saludable.entity_class = entityClass;
-//			if (saludable.widgetCache.hasOwnProperty('widget'+entityClass)){ 
-//				var widget = saludable.widgetCache['widget'+entityClass];
-//				domConstruct.empty("centerPane");
-//				registry.byId('centerPane').addChild(widget);
-//			}else{
-//				if (item.alreadyClicked) return;
-//				item.alreadyClicked=true;
-//				standby.show();
-//				request('/getWidget?entityClass=' + entityClass + '&template=' + item.template).then(
-//					function(response){
-//						var contentPane = new ContentPane({content:response});
-//						saludable.widgetCache['widget'+entityClass]=contentPane;
-//						domConstruct.empty("centerPane");
-//						registry.byId('centerPane').addChild(contentPane);
-//						registry.byId('layout').resize();
-//					}
-//				);	
-//			}
-		};
-
 	});
 });
 

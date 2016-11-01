@@ -1,3 +1,4 @@
+//# sourceURL=weightedtree/weightedtree/weightedtree_test.js
 /*
  Copyright (c) 2016, BrightPoint Consulting, Inc.
 
@@ -50,9 +51,10 @@ var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(
 
 function loadData() {
 
-	d3.csv("data/BANCO2016.csv", function (csv) {
+	d3.csv("weightedtree/weightedtree/data/BANCO2016.csv", function (csv) {
 
         data.values=prepData(csv);
+        dagma['data']=data;
 
         initialize();
 
