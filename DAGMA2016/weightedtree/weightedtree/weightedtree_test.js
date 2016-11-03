@@ -51,7 +51,7 @@ var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(
 
 function loadData() {
 
-	d3.csv("weightedtree/weightedtree/data/BANCO2016.csv", function (csv) {
+	d3.csv("weightedtree/weightedtree/data/Banco-2016-Oct31.csv", function (csv) {
 
         data.values=prepData(csv);
         dagma['data']=data;
@@ -82,9 +82,9 @@ function prepData(csv) {
         .key(function (d) {
             return d.AREA;
         })
-        .key(function (d) {
-            return d.NOMBRE_AREA_FUNCIONAL;
-        })
+//        .key(function (d) {
+//            return d.NOMBRE_AREA_FUNCIONAL;
+//        })
         .key(function (d) {
             return d.NOMBRE_PROYECTO;
         })
@@ -155,10 +155,6 @@ function initialize() {
     //We use this function to size the components based on the selected value from the RadiaLProgressTest.html page.
     changeSize("1082,750");
 
-    // Open up some of the tree branches.
-//    viz.toggleNode(data.values[2]);
-//    viz.toggleNode(data.values[2].values[0]);
-//    viz.toggleNode(data.values[3]);
 
 }
 
