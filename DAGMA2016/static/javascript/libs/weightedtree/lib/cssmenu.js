@@ -9,7 +9,7 @@
       }, options);
 
       return this.each(function() {
-        cssmenu.prepend('<div id="menu-button"><img src="weightedtree/lib/styles/img/DAGMA_LOGO.jpg" class="logo">' + settings.title + '</div>');
+        cssmenu.prepend('<div id="menu-button"><img src="../static/images/DAGMA_LOGO_25x25.png" class="logo">' + settings.title + '</div>');
 
         $(this).find("#menu-button").on('click', function(){
           toggleMenu(this);

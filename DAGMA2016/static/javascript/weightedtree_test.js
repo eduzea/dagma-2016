@@ -33,7 +33,6 @@
 // html element that holds the chart
 var viz_container;
 
-// our weighted tree
 var viz;
 
 // our theme
@@ -43,48 +42,42 @@ var theme;
 var data = {};
 
 // stores the currently selected value field
-var valueField = "PTTO ACTIVIDAD";
-var valueFields = ["PTTO ACTIVIDAD","EJECUCION","CDP","DISPONIBLE","% EJECUCION"];
-
+var valueField = {banco:"PTTO ACTIVIDAD",contratos:'VALOR'};
+var valueFields = {banco:["PTTO ACTIVIDAD","EJECUCION","CDP","DISPONIBLE","% EJECUCION"],contratos:['VALOR']};
 
 var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(",.0f")(d); };
 
 function loadData() {
-
-	d3.csv("weightedtree/weightedtree/data/Banco-2016-Oct31.csv", function (csv) {
-
-        data.values=prepData(csv);
-        dagma['data']=data;
-
+	var activeTree = dagma.tree;
+	data[activeTree]={}
+	var dataPaths = {'banco':"../static/data/Banco-2016-Oct31.csv",'contratos':"../static/data/Contratos-Oct31-2016.csv"};
+	d3.csv(dataPaths[activeTree], function (csv) {
+        data[activeTree].values=prepData(csv, activeTree);
         initialize();
-
     });
 
 }
 
-function prepData(csv) {
+function prepData(csv, activeTree) {
 
     var values=[];
-
-    //Clean federal budget data and remove all rows where all values are zero or no labels
     csv.forEach(function (d,i) {
         var t = 0;
-        for (var i = 0; i < valueFields.length; i++) {
-            t += Number(d[valueFields[i]]);
+        for (var i = 0; i < valueFields[activeTree].length; i++) {
+            t += Number(d[valueFields[activeTree][i]]);
         }
         if (t > 0) {
             values.push(d);
         }
     })
 
-    //Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
-     var nest = d3.nest()
+  //Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
+    var nest;
+    if (activeTree == 'banco'){
+    	nest = d3.nest()
         .key(function (d) {
             return d.AREA;
         })
-//        .key(function (d) {
-//            return d.NOMBRE_AREA_FUNCIONAL;
-//        })
         .key(function (d) {
             return d.NOMBRE_PROYECTO;
         })
@@ -92,10 +85,28 @@ function prepData(csv) {
             return d.ACTIVIDADES;
         })
         .entries(values);
-
+    }else{
+    	nest = d3.nest()
+        .key(function (d) {
+            return d.AREA;
+        })
+        .key(function (d) {
+            return d.BP;
+        })
+        .key(function (d) {
+            return d.PROYECTO;
+        })
+        .key(function (d) {
+            return d.MODALIDAD;
+        })
+        .key(function (d) {
+            return d.TIPO;
+        })
+        .entries(values);
+    }
 
     //This will be a viz.data function;
-    vizuly.data.aggregateNest(nest, valueFields, function (a, b) {
+    vizuly.data.aggregateNest(nest, valueFields[activeTree], function (a, b) {
         return Number(a) + Number(b);
     });
 
@@ -119,30 +130,29 @@ function prepData(csv) {
     var node={};
     node.values = nest;
     removeEmptyNodes(node,"0","0");
-
     return nest;
 }
 
 function initialize() {
 
+	var activeTree = dagma.tree;
 
-    viz = vizuly.viz.weighted_tree(document.getElementById("viz_container"));
-
+    dagma.vizTrees[activeTree] = vizuly.viz.weighted_tree(document.getElementById("viz_container"+activeTree));
 
     //Here we create three vizuly themes for each radial progress component.
     //A theme manages the look and feel of the component output.  You can only have
     //one component active per theme, so we bind each theme to the corresponding component.
-    theme = vizuly.theme.weighted_tree(viz).skin(vizuly.skin.WEIGHTED_TREE_TRAFFICLIGHT);
+    theme = vizuly.theme.weighted_tree(dagma.vizTrees[activeTree]).skin(vizuly.skin.WEIGHTED_TREE_TRAFFICLIGHT);
 
     //Like D3 and jQuery, vizuly uses a function chaining syntax to set component properties
     //Here we set some bases line properties for all three components.
-    viz.data(data)                                                      // Expects hierarchical array of objects.
+    dagma.vizTrees[activeTree].data(data[activeTree])                                                      // Expects hierarchical array of objects.
         .width(600)                                                     // Width of component
         .height(600)                                                    // Height of component
         .children(function (d) { return d.values })                     // Denotes the property that holds child object array
         .key(function (d) { return d.id })                              // Unique key
         .value(function (d) {
-            return Number(d["agg_" + valueField]) })                    // The property of the datum that will be used for the branch and node size
+            return Number(d["agg_" + valueField[activeTree]]) })                    // The property of the datum that will be used for the branch and node size
         .fixedSpan(-1)                                                  // fixedSpan > 0 will use this pixel value for horizontal spread versus auto size based on viz width
         .label(function (d) {                                           // returns label for each node.
             return trimLabel(d.key || (d['Level' + d.depth]))})
@@ -153,8 +163,12 @@ function initialize() {
 
 
     //We use this function to size the components based on the selected value from the RadiaLProgressTest.html page.
-    changeSize("1082,750");
+    changeSize("1082,750",activeTree);
 
+    // Open up some of the tree branches.
+//    viz.toggleNode(data.values[2]);
+//    viz.toggleNode(data.values[2].values[0]);
+//    viz.toggleNode(data.values[3]);
 
 }
 
@@ -233,7 +247,8 @@ function onMouseOut(e,d,i) {
 
 //We can capture click events and respond to them
 function onClick(g,d,i) {
-    viz.toggleNode(d);
+	var activeTree = dagma.tree;
+    dagma.vizTrees[activeTree].toggleNode(d);
 }
 
 
@@ -252,10 +267,10 @@ function changeSkin(val) {
 }
 
 //This changes the size of the component by adjusting the radius and width/height;
-function changeSize(val) {
+function changeSize(val, activeTree) {
     var s = String(val).split(",");
     viz_container.transition().duration(300).style('width', s[0] + 'px').style('height', s[1] + 'px');
-    viz.width(s[0]).height(s[1]*.8).update();
+    dagma.vizTrees[activeTree].width(s[0]).height(s[1]*.8).update();
 }
 
 //This sets the same value for each radial progress

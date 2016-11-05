@@ -2,59 +2,52 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Vizuly - Weighted Tree</title>
 
     <!-- We use google fonts for many of the examples, but they are not necessary -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto|Raleway:600,400,200' rel='stylesheet' type='text/css'>
 
     <!-- Test container style sheets -->
-    <link rel="stylesheet" href="weightedtree/weightedtree/styles/examples.css">
+    <link rel="stylesheet" href="../static/javascript/libs/weightedtree/weightedtree/styles/examples.css">
 
     <!-- Vizuly specific style sheets -->
-    <link rel="stylesheet" href="weightedtree/lib/styles/vizuly.css">
-    <link rel="stylesheet" href="weightedtree/lib/styles/vizuly_weightedtree.css">
+    <link rel="stylesheet" href="../static/javascript/libs/weightedtree/lib/styles/vizuly.css">
+    <link rel="stylesheet" href="../static/javascript/libs/weightedtree/lib/styles/vizuly_weightedtree.css">
 
     <!-- Supporting test container files:  Vizuly does NOT rely on these -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="weightedtree/lib/styles/cssmenu.css">
-    <script type="text/javascript" src="weightedtree/lib/jquery-2.1.1.min.js"></script>
-    <script src="weightedtree/lib/cssmenu.js"></script>
+    <link rel="stylesheet" href="../static/javascript/libs/weightedtree/lib/styles/cssmenu.css">
+    <script type="text/javascript" src="../static/javascript/libs/weightedtree/lib/jquery-2.1.1.min.js"></script>
+    <script src="../static/javascript/libs/weightedtree/lib/cssmenu.js"></script>
 
     <!-- D3.js ... of course! -->
-    <script src="weightedtree/weightedtree/lib/d3.min.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/lib/d3.min.js"></script>
 
     <!-- debug source scripts: start --> 
-    <script src="weightedtree/weightedtree/src/namespace/namespace.js"></script>
-    <script src="weightedtree/weightedtree/src/viz/_viz.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/namespace/namespace.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/viz/_viz.js"></script>
 
-    <script src="weightedtree/weightedtree/src/theme/_theme.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/theme/_theme.js"></script>
 
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/core/component.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/core/data.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/core/util.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/core/color.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/core/format.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/svg/_svg.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/svg/gradient.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/svg/filter.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/viz/weightedtree.js"></script>
+    <script src="../static/javascript/libs/weightedtree/weightedtree/src/theme/weightedtree.js"></script>
 
-    <script src="weightedtree/weightedtree/src/core/component.js"></script>
-    <script src="weightedtree/weightedtree/src/core/data.js"></script>
-    <script src="weightedtree/weightedtree/src/core/util.js"></script>
-    <script src="weightedtree/weightedtree/src/core/color.js"></script>
-    <script src="weightedtree/weightedtree/src/core/format.js"></script>
-    <script src="weightedtree/weightedtree/src/svg/_svg.js"></script>
-    <script src="weightedtree/weightedtree/src/svg/gradient.js"></script>
-    <script src="weightedtree/weightedtree/src/svg/filter.js"></script>
-    <script src="weightedtree/weightedtree/src/viz/weightedtree.js"></script>
-    <script src="weightedtree/weightedtree/src/theme/weightedtree.js"></script>
-
-	<!-- debug source scripts: end -->
-
-<!--
-    <script src="lib/vizuly_core.min.js"></script>
-	<script src="lib/vizuly_weightedtree.min.js"></script>
--->
-    <script src="weightedtree/weightedtree/weightedtree_test.js"></script>
+    <script src="../static/javascript/weightedtree_test.js"></script>
+    <script>dagma.tree = '{{tree}}';</script>
 
 </head>
 
 <body>
 
-<div id='cssmenu'>
+<div id='cssmenu{{tree}}'>
     <ul class="main-menu">
         <li class='active'><a><span class="label">VARIABLE </span><br><span class="setting"></span></a>
           <ul class="options" callback="changeData">
@@ -69,7 +62,7 @@
 
 <!-- Our main content container-->
 <div  style="width:100%; overflow:hidden;">
-	<div id="viz_container" class="z-depth-3"></div>
+	<div id="viz_container{{tree}}" name={{tree}} class="z-depth-3"></div>
 </div>
 
 
@@ -100,13 +93,13 @@
                 .html("<a>" + screenWidth + "px - " + screenHeight + "px</a>");
 
 
-        $("#cssmenu").menumaker({
+        $("#cssmenu{{tree}}").menumaker({
             title: "DAGMA 2016",
             format: "multitoggle"
         });
 
         // Set the size of our container element.
-        viz_container = d3.selectAll("#viz_container")
+        viz_container = d3.selectAll("#viz_container{{tree}}")
                 .style("width", screenWidth + "px")
                 .style("height", screenHeight + "px");
 

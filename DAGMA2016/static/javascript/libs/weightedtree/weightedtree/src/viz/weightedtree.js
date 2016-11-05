@@ -1,3 +1,4 @@
+//# sourceURL=../static/javascript/libs/weightedtree/weightedtree/weightedtree_test.js
 /*
  Copyright (c) 2016, BrightPoint Consulting, Inc.
 
@@ -147,7 +148,6 @@ vizuly.viz.weighted_tree = function (parent) {
         var scale;
         if (scope.branchPadding == -1) {
            scale = Math.min(size.height,size.width)/scope.children(scope.data).length;
-            console.log("scale = " + scale);
         }
         else {
            scale = Math.min(size.height,size.width)*scope.branchPadding;

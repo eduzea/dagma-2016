@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<link rel="stylesheet" href="home.css" media="screen">
+		<link rel="stylesheet" href="../static/css/home.css" media="screen">
 		<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dijit/themes/claro/claro.css">
 		<script>
 			dojoConfig = {
@@ -15,7 +15,7 @@
 			};
 		</script>
 		<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.2/dojo/dojo.js"></script>
-		<script src="home.js" ></script>
+		<script src="../static/javascript/home.js" ></script>
 		<script>
 			require(["dojo/parser", "dijit/layout/BorderContainer","dijit/layout/TabContainer", "dijit/layout/ContentPane", "dojox/layout/ContentPane", "dojox/layout/ScrollPane"]);
 		</script>
@@ -40,13 +40,17 @@
 				</div>			
 				<div id="banco" data-dojo-type="dojox/layout/ContentPane" 
 					 title="BANCO DE PROYECTOS"
-					 data-dojo-props="href:'weightedtree/weightedtree/WeightedtreeTest.html', 
+					 data-dojo-props="href:'/weightedtree?tree=banco', 
 					 				executeScripts: true,
 					 				refreshOnShow: false,
 					 				">
 				</div>
-				<div id="contratos" data-dojo-type="dojox/layout/ContentPane"  title="CONTRATACION">
-					TEST
+				<div id="contratos" data-dojo-type="dojox/layout/ContentPane" 
+					 title="CONTRATOS"
+					 data-dojo-props="href:'/weightedtree?tree=contratos', 
+					 				executeScripts: true,
+					 				refreshOnShow: false,
+					 				">
 				</div>
 			</div>
 		<div style="text-align:center" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'">

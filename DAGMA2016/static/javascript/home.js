@@ -3,16 +3,22 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		"dojo/domReady!" ], function(d3, Memory, Model, Tree, dom, registry,
 		ready) {
 	ready(function() {
-		dagma = {};//dagma especific namespace
-		var valueFields = [ "PTTO ACTIVIDAD", "EJECUCION", "CDP", "DISPONIBLE",
-				"% EJECUCION" ];
-		var data = {};
-		d3.csv("weightedtree/weightedtree/data/Banco-2016-Oct31.csv", function(
+		
+		// Set up Dagma level globals
+		dagma = {};//dagma especific namespace. Global.		
+		dagma.vizTrees={}
+
+		
+		d3.csv("../static/data/Banco-2016-Oct31.csv", function(
 				csv) {
 			data = prepData(csv)
 			buildTree(data)
 		});
-
+		
+		var valueFields = [ "PTTO ACTIVIDAD", "EJECUCION", "CDP", "DISPONIBLE",
+				"% EJECUCION" ];
+		var data = {};
+		
 		var formatNode = function(node, parent, isLeaf) {
 			return {
 				id : node.id, //default to a simple node string
@@ -36,7 +42,6 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		};
 
 		var buildTree = function(data) {
-
 			var nodeData = [ {
 				id : 'root',
 				name : 'root'
@@ -133,13 +138,15 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		};
 
 		tabsContainer = registry.byId('tabs');
-		contentPane = registry.byId('banco');
-		contentPane.set("onDownloadEnd", function() {
-			//This hacky approach is necessary beacuese refreshOnShow not working. 
-			//It prevents the content pane from reloading.
-			contentPane.href='';
+		tabsContainer.watch("selectedChildWidget", function(name, oval, nval){
+		    dagma.tree = nval.id;
 		});
-
-
+		tabsContainer.getChildren().forEach(function(tab){
+			tab.set("onDownloadEnd", function() {
+				//This hacky approach is necessary beacuese refreshOnShow not working. 
+				//It prevents the content pane from reloading.
+				tab.href='';
+			});
+		})
 	});
 });
