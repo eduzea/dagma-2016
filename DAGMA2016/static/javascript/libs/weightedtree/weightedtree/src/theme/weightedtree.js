@@ -1,4 +1,4 @@
-
+//# sourceURL=../static/javascript/libs/weightedtree/weightedtree/weightedtree_test.js
 //Here we **instantiate** the theme borrowing from the same design pattern as D3.js where we use an encapsulated function chained object.
 //Each theme requires a viz component at construction.  It is important to note that while a viz component has no
 //dependency on a theme, the theme does require knowledge of the viz display OUTPUT (but not the internals), so it can modify them.
@@ -101,10 +101,55 @@ vizuly.theme.weighted_tree = function (viz) {
                 return null;
             },
             font_size: function() { return null; }
+        },
+        "Contratos" : {
+            name: "Contratos",                          // Skin Name
+            label_color: "#333",                    // Color of the center label
+            link_colors: ["#bd0026", "#fecc5c", "#fd8d3c", "#f03b20", "#B02D5D",
+                "#9B2C67", "#982B9A", "#692DA7", "#5725AA", "#4823AF",
+                "#d7b5d8", "#dd1c77", "#5A0C7A", "#5A0C7A"],
+            link_stroke: function (d, i) {
+            	return contratoColor(d);
+            },
+            link_stroke_opacity: function (d,i) {
+                return null;
+            },
+            node_fill: function (d, i) {
+                return contratoColor(d);
+            },
+            node_fill_opacity: function (d, i) {
+                return null;
+            },
+            node_stroke: function (d, i) {
+                return null;
+            },
+            node_stroke_opacity: function (d, i) {
+                return null;
+            },
+            text_fill_opacity: function (d,i) {
+                return null;
+            },
+            font_size: function() { return null; }
         }
     }
     
-    trafficLight = function(d){
+    var contratoColor = function(d){
+    	if(d.depth == null)
+    		d = d.target;
+    	if(d.depth == 4){
+        	if (d['childProp_ESTADO'] == "LIQUIDACION"){
+        		return "#FF0000";
+        	}else if (d['childProp_ESTADO'] == "SUSPENDIDO"){
+        		return "#FFFF00";    		
+        	}else{
+        		return "#00FF00"
+        	} 		
+    	}else{
+    		return "#4823AF";
+    	}
+    } 
+    
+    var trafficLight = function(d){
     	var pct_ejecucion = d['agg_EJECUCION'] / d['agg_PTTO ACTIVIDAD']; 
     	if (pct_ejecucion < 0.5){
     		return "#FF0000";

@@ -5,8 +5,10 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 	ready(function() {
 		
 		// Set up Dagma level globals
-		dagma = {};//dagma especific namespace. Global.		
+		dagma = {};//dagma especific namespace. Global.
+		dagma.data={};
 		dagma.vizTrees={}
+		dagma.treeLists={}
 
 		
 		d3.csv("../static/data/Banco-2016-Oct31.csv", function(
@@ -83,12 +85,12 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 				if (!item.clickable)
 					return;
 				var indices = item.id.split("_")
-				var theNode = dagma.data;
+				var theNode = dagma.data[dagma.tree];
 				for (var i = 1; i < indices.length; i++) {//0 is the root node
 					theNode = theNode.values[indices[i]];
-					viz.toggleNode(theNode);
+					dagma.vizTrees[dagma.tree].toggleNode(theNode);
 				}
-				viz.toggleNode(theNode);
+				dagma.vizTrees[dagma.tree].toggleNode(theNode);
 			};
 
 		}
@@ -108,8 +110,6 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 			//Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
 			var nest = d3.nest().key(function(d) {
 				return d.AREA;
-			}).key(function(d) {
-				return d.NOMBRE_AREA_FUNCIONAL;
 			}).key(function(d) {
 				return d.NOMBRE_PROYECTO;
 			}).key(function(d) {

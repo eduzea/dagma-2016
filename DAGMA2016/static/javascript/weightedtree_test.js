@@ -44,15 +44,15 @@ var data = {};
 // stores the currently selected value field
 var valueField = {banco:"PTTO ACTIVIDAD",contratos:'VALOR'};
 var valueFields = {banco:["PTTO ACTIVIDAD","EJECUCION","CDP","DISPONIBLE","% EJECUCION"],contratos:['VALOR']};
-
+var themes = {banco:vizuly.skin.WEIGHTED_TREE_TRAFFICLIGHT, contratos:'Contratos'}
 var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(",.0f")(d); };
 
 function loadData() {
 	var activeTree = dagma.tree;
-	data[activeTree]={}
 	var dataPaths = {'banco':"../static/data/Banco-2016-Oct31.csv",'contratos':"../static/data/Contratos-Oct31-2016.csv"};
+	dagma.data[activeTree]={};
 	d3.csv(dataPaths[activeTree], function (csv) {
-        data[activeTree].values=prepData(csv, activeTree);
+        dagma.data[activeTree].values=prepData(csv, activeTree);
         initialize();
     });
 
@@ -91,16 +91,13 @@ function prepData(csv, activeTree) {
             return d.AREA;
         })
         .key(function (d) {
-            return d.BP;
-        })
-        .key(function (d) {
             return d.PROYECTO;
         })
         .key(function (d) {
             return d.MODALIDAD;
         })
         .key(function (d) {
-            return d.TIPO;
+            return d.CONTRATISTA;
         })
         .entries(values);
     }
@@ -142,11 +139,11 @@ function initialize() {
     //Here we create three vizuly themes for each radial progress component.
     //A theme manages the look and feel of the component output.  You can only have
     //one component active per theme, so we bind each theme to the corresponding component.
-    theme = vizuly.theme.weighted_tree(dagma.vizTrees[activeTree]).skin(vizuly.skin.WEIGHTED_TREE_TRAFFICLIGHT);
+    theme = vizuly.theme.weighted_tree(dagma.vizTrees[activeTree]).skin(themes[activeTree]);
 
     //Like D3 and jQuery, vizuly uses a function chaining syntax to set component properties
     //Here we set some bases line properties for all three components.
-    dagma.vizTrees[activeTree].data(data[activeTree])                                                      // Expects hierarchical array of objects.
+    dagma.vizTrees[activeTree].data(dagma.data[activeTree])                                                      // Expects hierarchical array of objects.
         .width(600)                                                     // Width of component
         .height(600)                                                    // Height of component
         .children(function (d) { return d.values })                     // Denotes the property that holds child object array
@@ -165,11 +162,6 @@ function initialize() {
     //We use this function to size the components based on the selected value from the RadiaLProgressTest.html page.
     changeSize("1082,750",activeTree);
 
-    // Open up some of the tree branches.
-//    viz.toggleNode(data.values[2]);
-//    viz.toggleNode(data.values[2].values[0]);
-//    viz.toggleNode(data.values[3]);
-
 }
 
 
@@ -177,8 +169,8 @@ function trimLabel(label) {
    return (String(label).length > 20) ? String(label).substr(0, 17) + "..." : label;
 }
 
-
-var datatip='<div class="tooltip" style="width: 250px; background-opacity:.5">' +
+var datatip={};
+datatip['banco']='<div class="tooltip" style="width: 250px; background-opacity:.5">' +
 	'<div class="header3">ACTIVIDAD</div> ' +
 	'<div class="header-rule"></div>' +
 	'<div class="header-rule"></div>' +
@@ -193,26 +185,59 @@ var datatip='<div class="tooltip" style="width: 250px; background-opacity:.5">' 
 	'<div class="header1">% EJECUCION: VAL_% EJECUCION</div>' +
 	'</div>';
 
+datatip['contratos-branch'] = '<div class="tooltip" style="width: 250px; background-opacity:.5">' +
+								'<div class="header3">ACTIVIDAD</div> ' +
+								'<div class="header-rule"></div>' +
+								'<div class="header-rule"></div>' +
+								'<div class="header1">VALOR: VAL_VALOR</div>'  +
+							'</div>'
+datatip['contratos-leaf'] =
+	'<div class="tooltip" style="width: 500px; background-opacity:.5">' +
+		'<div class="header3">ACTIVIDAD</div> ' +
+		'<div class="header-rule"></div>' +
+		'<div class="header-rule"></div>' +
+		'<div class="header1">VALOR: VAL_VALOR</div>'  +
+		'<div class="header-rule"></div>' +
+		'<div class="header1">OBJETO: VAL_OBJETO</div>' +
+		'<div class="header-rule"></div>' +
+		'<div class="header1">CONTRATISTA: VAL_CONTRATISTA</div>' +
+		'<div class="header-rule"></div>' +
+		'<div class="header1">FECHA: VAL_FECHA</div>' +
+		'<div class="header-rule"></div>' +
+		'<div class="header1">PLAZO: VAL_PLAZO</div>'
+	'</div>'
+
+var toolTipHTML = function(d, activeTree){
+	var html =''
+	if(activeTree == 'banco'){
+		html = datatip[activeTree].replace("ACTIVIDAD", d.key);
+	    html = html.replace("VAL_PRESUPUESTO", formatCurrency(d["agg_" + "PTTO ACTIVIDAD"]));
+	    html = html.replace("VAL_EJECUTADO", formatCurrency(d["agg_" + "EJECUCION"]));
+	    html = html.replace("VAL_CDP", formatCurrency(d["agg_" + "CDP"]));
+	    html = html.replace("VAL_DISPONIBLE", formatCurrency(d["agg_" + "DISPONIBLE"]));
+	    html = html.replace("VAL_EJECUTADO", formatCurrency(d["agg_" + "EJECUTADO"]));
+	    html = html.replace("VAL_% EJECUCION", Math.round(100.0 * d["agg_" + "EJECUCION"] / d["agg_" + "PTTO ACTIVIDAD"]) + "%");		
+	}else{
+		if (d.depth == 4){
+			html = datatip['contratos-leaf'].replace("ACTIVIDAD", d.key);
+			html = html.replace("VAL_VALOR", formatCurrency(d["agg_" + "VALOR"]));
+			html = html.replace("VAL_OBJETO", d["childProp_" + "OBJETO"]);
+			html = html.replace("VAL_CONTRATISTA", d["childProp_" + "CONTRATISTA"]);
+			html = html.replace("VAL_FECHA", d["childProp_" + "FECHA"]);
+			html = html.replace("VAL_PLAZO", d["childProp_" + "PLAZO"]);
+		}else{
+			html = datatip['contratos-branch'].replace("ACTIVIDAD", d.key);
+			html = html.replace("VAL_VALOR", formatCurrency(d["agg_" + "VALOR"]));			
+		}
+	}
+	return html;
+}
 
 // This function uses the above html template to replace values and then creates a new <div> that it appends to the
 // document.body.  This is just one way you could implement a data tip.
 function createDataTip(x,y,d) {
 
-	var presupuesto = d["agg_" + "PTTO ACTIVIDAD"];
-	var ejecutado = d["agg_" + "EJECUCION"];
-	var cdp = d["agg_" + "CDP"];
-	var disponible = d["agg_" + "DISPONIBLE"];
-	var pctEjecucion = Math.round(100.0 * d["agg_" + "EJECUCION"] / d["agg_" + "PTTO ACTIVIDAD"]) + "%"
-
-	
-    var html = datatip.replace("ACTIVIDAD", d.key);
-    html = html.replace("VAL_PRESUPUESTO", formatCurrency(presupuesto));
-    html = html.replace("VAL_EJECUTADO", formatCurrency(ejecutado));
-    html = html.replace("VAL_CDP", formatCurrency(cdp));
-    html = html.replace("VAL_DISPONIBLE", formatCurrency(disponible));
-    html = html.replace("VAL_EJECUTADO", formatCurrency(ejecutado));
-    html = html.replace("VAL_% EJECUCION", pctEjecucion);
-
+	var html = toolTipHTML(d,dagma.tree);
     d3.select("body")
         .append("div")
         .attr("class", "vz-weighted_tree-tip")
@@ -222,7 +247,6 @@ function createDataTip(x,y,d) {
         .style("opacity",0)
         .html(html)
         .transition().style("opacity",1);
-
 }
 
 function onMeasure() {
