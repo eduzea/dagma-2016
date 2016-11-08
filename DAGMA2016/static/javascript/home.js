@@ -1,7 +1,6 @@
 require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
-		"dijit/Tree", 'dojo/dom', "dijit/registry", "dojo/ready",
-		"dojo/domReady!" ], function(d3, Memory, Model, Tree, dom, registry,
-		ready) {
+		"dijit/Tree", 'dojo/dom', "dijit/registry", "dojo/ready", "dojo/dom-construct",
+		"dojo/domReady!" ], function(d3, Memory, Model, Tree, dom, registry, ready, domConstruct) {
 	ready(function() {
 		
 		// Set up Dagma level globals
@@ -10,16 +9,31 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		dagma.vizTrees={}
 		dagma.treeLists={}
 
-		
-		d3.csv("../static/data/Banco-2016-Oct31.csv", function(
-				csv) {
-			data = prepData(csv)
-			buildTree(data)
+		//Banco Treelist
+		d3.csv("../static/data/Banco-2016-Oct31.csv", function(csv) {
+			dagma.data['banco'] = prepData(csv,'banco')
+			dagma.treeLists['banco'] = buildTree(dagma.data['banco'],'banco')
+			dagma.treeLists['banco'].placeAt(dom.byId('tree'));
+			dagma.treeLists['banco'].startup();
+			registry.byId('layout').resize();
+
 		});
 		
-		var valueFields = [ "PTTO ACTIVIDAD", "EJECUCION", "CDP", "DISPONIBLE",
-				"% EJECUCION" ];
-		var data = {};
+		//Contratos Treelist
+		d3.csv("../static/data/Contratos-Oct31-2016.csv", function(csv) {
+			dagma.data['contratos'] = prepData(csv,'contratos')
+			dagma.treeLists['contratos'] = buildTree(dagma.data['contratos'],'contratos');
+			dagma.treeLists['contratos'].startup();
+		});
+		
+		var valueFields={};
+		valueFields['banco'] = [ "PTTO ACTIVIDAD", "EJECUCION", "CDP", "DISPONIBLE","% EJECUCION" ];
+		valueFields['contratos'] = ['VALOR'];
+		
+		
+		var levels = {};
+		levels['banco']=['AREA','PROYECTO','ACTIVIDADES'];
+		levels['contratos']=[ "AREA", "PROYECTO", "MODALIDAD", "CONTRATISTA"];
 		
 		var formatNode = function(node, parent, isLeaf) {
 			return {
@@ -43,7 +57,7 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 			}
 		};
 
-		var buildTree = function(data) {
+		var buildTree = function(data, activeTree) {
 			var nodeData = [ {
 				id : 'root',
 				name : 'root'
@@ -69,13 +83,10 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 			});
 			// Create the Tree.
 			var tree = new Tree({
-				id : 'rootTree',
+				id : 'rootTree'+activeTree,
 				model : myModel,
 				showRoot : false
 			});
-			tree.placeAt(dom.byId('tree'));
-			tree.startup();
-			registry.byId('layout').resize();
 
 			tree.onOpen = function(item, node) {
 				registry.byId('layout').resize();
@@ -92,29 +103,39 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 				}
 				dagma.vizTrees[dagma.tree].toggleNode(theNode);
 			};
-
+			
+			return tree;
 		}
 
-		var prepData = function(csv) {
+		var prepData = function(csv, activeTree) {
 			var values = [];
 			//Remove all rows where all values are zero or no labels
 			csv.forEach(function(d, i) {
 				var t = 0;
-				for (var i = 0; i < valueFields.length; i++) {
-					t += Number(d[valueFields[i]]);
+				for (var i = 0; i < valueFields[activeTree].length; i++) {
+					t += Number(d[valueFields[activeTree][i]]);
 				}
 				if (t > 0) {
 					values.push(d);
 				}
 			})
-			//Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
-			var nest = d3.nest().key(function(d) {
-				return d.AREA;
-			}).key(function(d) {
-				return d.NOMBRE_PROYECTO;
-			}).key(function(d) {
-				return d.ACTIVIDADES;
-			}).entries(values);
+			
+			var makeNest = function(values,activeTree){
+				var nest=d3.nest();
+				levels[activeTree].forEach(function(level){
+					nest = nest.key(function(d){
+						if(d[level]==null){
+							console.log(d);
+						} 
+						return d[level];
+					}); 
+				});
+				nest = nest.entries(values);
+				return nest;
+			};
+			
+			var nest = makeNest(values,'banco');
+
 			//Remove empty child nodes left at end of aggregation and add unqiue ids
 			function removeEmptyNodes(node, parentId, childId) {
 				if (!node)
@@ -140,10 +161,14 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		tabsContainer = registry.byId('tabs');
 		tabsContainer.watch("selectedChildWidget", function(name, oval, nval){
 		    dagma.tree = nval.id;
+		    domConstruct.empty("leadingPane");
+			registry.byId('leadingPane').addChild(dagma.treeLists[nval.id]);
+			registry.byId('layout').resize();
+
 		});
 		tabsContainer.getChildren().forEach(function(tab){
 			tab.set("onDownloadEnd", function() {
-				//This hacky approach is necessary beacuese refreshOnShow not working. 
+				//This hacky approach is necessary beacause refreshOnShow not working. 
 				//It prevents the content pane from reloading.
 				tab.href='';
 			});

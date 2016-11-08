@@ -26,7 +26,7 @@
 			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
 			<div>Ultima actualizacion: Octubre 31, 2016</div>
 			</div>
-			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true, region:'leading'">
+			<div id = 'leadingPane' data-dojo-type="dijit/layout/ContentPane" data-dojo-props="splitter:true, region:'leading'">
 				<div id='tree'></div>
 			</div>
 			<div id='tabs' 
@@ -35,9 +35,6 @@
 									isLayoutContainer:'true',
 									useMenu:'false', 
 									tabPosition: 'top'">
-				<div id="alertas" data-dojo-type="dojox/layout/ContentPane"  title="ALERTAS">
-					TEST
-				</div>			
 				<div id="banco" data-dojo-type="dojox/layout/ContentPane" 
 					 title="BANCO DE PROYECTOS"
 					 data-dojo-props="href:'/weightedtree?tree=banco', 
@@ -52,6 +49,9 @@
 					 				refreshOnShow: false,
 					 				">
 				</div>
+				<div id="alertas" data-dojo-type="dojox/layout/ContentPane"  title="ALERTAS">
+					TEST
+				</div>			
 			</div>
 		<div style="text-align:center" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'">
 				&copy;2016 DAGMA 
