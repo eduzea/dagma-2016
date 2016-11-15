@@ -16,5 +16,5 @@ class Home(webapp2.RequestHandler):
 class WeightedTree(webapp2.RequestHandler):
     def get(self):
         treeName = self.request.get('tree')
-        template = JINJA_ENVIRONMENT.get_template('WeightedTreeTest.html')
+        template = JINJA_ENVIRONMENT.get_template('WeightedtreeTest.html')
         self.response.write(template.render({'tree':treeName}))

@@ -22,7 +22,7 @@
 		<title>EJECUCION DAGMA 2016</title>
 	</head>
 	<body class='claro'>
-		<div id='layout' data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="gutters:true, liveSplitters:true" style="width: 100%; height: 100%">
+		<div id='layout' data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline', gutters:true, liveSplitters:true" style="width: 100%; height: 100%">
 			<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top'">
 			<div>Ultima actualizacion: Octubre 31, 2016</div>
 			</div>
@@ -35,6 +35,7 @@
 									isLayoutContainer:'true',
 									useMenu:'false', 
 									tabPosition: 'top'">
+				 			
 				<div id="banco" data-dojo-type="dojox/layout/ContentPane" 
 					 title="BANCO DE PROYECTOS"
 					 data-dojo-props="href:'/weightedtree?tree=banco', 
@@ -49,9 +50,16 @@
 					 				refreshOnShow: false,
 					 				">
 				</div>
-				<div id="alertas" data-dojo-type="dojox/layout/ContentPane"  title="ALERTAS">
-					TEST
-				</div>			
+				<div id="detalle" data-dojo-type="dijit/layout/ContentPane"  title="DETALLE" data-dojo-props="href:'../static/detalleBanco.html'">
+				</div>
+				<!--
+				<div id="pivot" data-dojo-type="dojox/layout/ContentPane"  title="TABLA DINAMICA"
+								data-dojo-props="href:'../static/tablaDinamica.html', 
+					 			executeScripts: true,
+					 			refreshOnShow: false,
+					 			">
+				</div>
+				 -->
 			</div>
 		<div style="text-align:center" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom'">
 				&copy;2016 DAGMA 

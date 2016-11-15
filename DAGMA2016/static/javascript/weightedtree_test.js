@@ -50,13 +50,31 @@ var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(
 function loadData() {
 	var activeTree = dagma.tree;
 	var dataPaths = {'banco':"../static/data/Banco-2016-Oct31.csv",'contratos':"../static/data/Contratos-Oct31-2016.csv"};
-	dagma.data[activeTree]={};
 	d3.csv(dataPaths[activeTree], function (csv) {
-        dagma.data[activeTree].values=prepData(csv, activeTree);
+        dagma.nestedData[activeTree].values=prepData(csv, activeTree);
         initialize();
     });
 
 }
+
+var levels = {};
+levels['banco']=['AREA','NOMBRE_PROYECTO','ACTIVIDADES'];
+levels['contratos']=[ "AREA", "PROYECTO", "MODALIDAD", "CONTRATISTA"];
+
+var makeNest = function(values,levels){
+	var nest=d3.nest();
+	levels.forEach(function(level){
+		nest = nest.key(function(d){
+			if(d[level]==null){
+				var a=1+2;
+			} 
+			return d[level];
+		}); 
+	});
+	nest = nest.entries(values);
+	return nest;
+};
+
 
 function prepData(csv, activeTree) {
 
@@ -71,37 +89,7 @@ function prepData(csv, activeTree) {
         }
     })
 
-  //Make our data into a nested tree.  If you already have a nested structure you don't need to do this.
-    var nest;
-    if (activeTree == 'banco'){
-    	nest = d3.nest()
-        .key(function (d) {
-            return d.AREA;
-        })
-        .key(function (d) {
-            return d.NOMBRE_PROYECTO;
-        })
-        .key(function (d) {
-            return d.ACTIVIDADES;
-        })
-        .entries(values);
-    }else{
-    	nest = d3.nest()
-        .key(function (d) {
-            return d.AREA;
-        })
-        .key(function (d) {
-            return d.PROYECTO;
-        })
-        .key(function (d) {
-            return d.MODALIDAD;
-        })
-        .key(function (d) {
-            return d.CONTRATISTA;
-        })
-        .entries(values);
-    }
-
+    var nest = makeNest(values,levels[activeTree]);
     //This will be a viz.data function;
     vizuly.data.aggregateNest(nest, valueFields[activeTree], function (a, b) {
         return Number(a) + Number(b);
@@ -143,7 +131,7 @@ function initialize() {
 
     //Like D3 and jQuery, vizuly uses a function chaining syntax to set component properties
     //Here we set some bases line properties for all three components.
-    dagma.vizTrees[activeTree].data(dagma.data[activeTree])                                                      // Expects hierarchical array of objects.
+    dagma.vizTrees[activeTree].data(dagma.nestedData[activeTree])                                                      // Expects hierarchical array of objects.
         .width(600)                                                     // Width of component
         .height(600)                                                    // Height of component
         .children(function (d) { return d.values })                     // Denotes the property that holds child object array

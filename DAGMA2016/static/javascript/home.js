@@ -3,16 +3,19 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		"dojo/domReady!" ], function(d3, Memory, Model, Tree, dom, registry, ready, domConstruct) {
 	ready(function() {
 		
+		var formatCurrency = function (d) { if (isNaN(d)) d = 0; return "$" + d3.format(",.0f")(d); };
+		
 		// Set up Dagma level globals
 		dagma = {};//dagma especific namespace. Global.
-		dagma.data={};
+		dagma.flatData={};
+		dagma.nestedData={};
 		dagma.vizTrees={}
 		dagma.treeLists={}
-
+		dagma.tree = 'banco';//DEBUG
 		//Banco Treelist
 		d3.csv("../static/data/Banco-2016-Oct31.csv", function(csv) {
-			dagma.data['banco'] = prepData(csv,'banco')
-			dagma.treeLists['banco'] = buildTree(dagma.data['banco'],'banco')
+			dagma.nestedData['banco'] = prepData(csv,'banco')
+			dagma.treeLists['banco'] = buildTree(dagma.nestedData['banco'],'banco')
 			dagma.treeLists['banco'].placeAt(dom.byId('tree'));
 			dagma.treeLists['banco'].startup();
 			registry.byId('layout').resize();
@@ -21,8 +24,8 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		
 		//Contratos Treelist
 		d3.csv("../static/data/Contratos-Oct31-2016.csv", function(csv) {
-			dagma.data['contratos'] = prepData(csv,'contratos')
-			dagma.treeLists['contratos'] = buildTree(dagma.data['contratos'],'contratos');
+			dagma.nestedData['contratos'] = prepData(csv,'contratos')
+			dagma.treeLists['contratos'] = buildTree(dagma.nestedData['contratos'],'contratos');
 			dagma.treeLists['contratos'].startup();
 		});
 		
@@ -32,7 +35,7 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 		
 		
 		var levels = {};
-		levels['banco']=['AREA','PROYECTO','ACTIVIDADES'];
+		levels['banco']=['AREA','NOMBRE_PROYECTO','ACTIVIDADES'];
 		levels['contratos']=[ "AREA", "PROYECTO", "MODALIDAD", "CONTRATISTA"];
 		
 		var formatNode = function(node, parent, isLeaf) {
@@ -40,7 +43,8 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 				id : node.id, //default to a simple node string
 				name : node.key,
 				parent : parent,
-				clickable : true
+				clickable : true,
+				leaf:isLeaf
 			}
 		}
 
@@ -95,18 +99,60 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 			tree.onClick = function(item, node, evt) {
 				if (!item.clickable)
 					return;
-				var indices = item.id.split("_")
-				var theNode = dagma.data[dagma.tree];
-				for (var i = 1; i < indices.length; i++) {//0 is the root node
+				var indices = item.id.split("_");
+				var theNode = dagma.nestedData[dagma.tree];
+				for (var i = 1; i < indices.length-1; i++) {//0 is the root node
 					theNode = theNode.values[indices[i]];
-					dagma.vizTrees[dagma.tree].toggleNode(theNode);
 				}
-				dagma.vizTrees[dagma.tree].toggleNode(theNode);
-			};
-			
+				tab = registry.byId('detalle');
+				if (tab.activeTree == dagma.tree){
+					updateDetalle(item,theNode);
+				}else{
+					tab.set("onDownloadEnd", function() {
+						dom.byId('header').innerHTML = theNode.key;
+						if (dagma.tree == 'banco'){
+							dom.byId('presupuesto').innerHTML = formatCurrency(theNode['agg_PTTO ACTIVIDAD']);
+							dom.byId('ejecutado').innerHTML = formatCurrency(theNode['agg_EJECUCION']);
+							dom.byId('cdp').innerHTML = formatCurrency(theNode['agg_CDP']);
+							dom.byId('disponible').innerHTML = formatCurrency(theNode['agg_DISPONIBLE']);
+							dom.byId('pctejecucion').innerHTML = d3.format(",.0f")(100*(theNode['agg_EJECUCION'] / theNode['agg_PTTO ACTIVIDAD'])) + "%";					
+						}else{
+							dom.byId('valor').innerHTML = formatCurrency(theNode['agg_VALOR']);
+							if (item.leaf){
+								dom.byId('objeto').innerHTML = theNode['childProp_OBJETO'];
+								dom.byId('fecha').innerHTML = theNode['childProp_FECHA'];
+								dom.byId('plazo').innerHTML = theNode['childProp_PLAZO'];						
+							}
+						}
+
+					});
+					
+				}
+				tabs = registry.byId('tabs');
+				tabs.selectChild('detalle');
+			};			
 			return tree;
 		}
 
+		var updateDetalle = function(item,theNode) {
+			dom.byId('header').innerHTML = theNode.key;
+			if (dagma.tree == 'banco'){
+				dom.byId('presupuesto').innerHTML = formatCurrency(theNode['agg_PTTO ACTIVIDAD']);
+				dom.byId('ejecutado').innerHTML = formatCurrency(theNode['agg_EJECUCION']);
+				dom.byId('cdp').innerHTML = formatCurrency(theNode['agg_CDP']);
+				dom.byId('disponible').innerHTML = formatCurrency(theNode['agg_DISPONIBLE']);
+				dom.byId('pctejecucion').innerHTML = d3.format(",.0f")(100*(theNode['agg_EJECUCION'] / theNode['agg_PTTO ACTIVIDAD'])) + "%";					
+			}else{
+				dom.byId('valor').innerHTML = formatCurrency(theNode['agg_VALOR']);
+				if (item.leaf){
+					dom.byId('objeto').innerHTML = theNode['childProp_OBJETO'];
+					dom.byId('fecha').innerHTML = theNode['childProp_FECHA'];
+					dom.byId('plazo').innerHTML = theNode['childProp_PLAZO'];						
+				}
+			}
+
+		};
+		
 		var prepData = function(csv, activeTree) {
 			var values = [];
 			//Remove all rows where all values are zero or no labels
@@ -119,14 +165,12 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 					values.push(d);
 				}
 			})
+			dagma.flatData[activeTree] = values;
 			
 			var makeNest = function(values,activeTree){
 				var nest=d3.nest();
 				levels[activeTree].forEach(function(level){
 					nest = nest.key(function(d){
-						if(d[level]==null){
-							console.log(d);
-						} 
 						return d[level];
 					}); 
 				});
@@ -134,7 +178,7 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 				return nest;
 			};
 			
-			var nest = makeNest(values,'banco');
+			var nest = makeNest(values,activeTree);
 
 			//Remove empty child nodes left at end of aggregation and add unqiue ids
 			function removeEmptyNodes(node, parentId, childId) {
@@ -155,23 +199,41 @@ require([ "d3/d3", "dojo/store/Memory", "dijit/tree/ObjectStoreModel",
 			var node = {};
 			node.values = nest;
 			removeEmptyNodes(node, "0", "0");
+			dagma.nestedData[activeTree]=nest;
 			return nest;
 		};
 
 		tabsContainer = registry.byId('tabs');
 		tabsContainer.watch("selectedChildWidget", function(name, oval, nval){
-		    dagma.tree = nval.id;
-		    domConstruct.empty("leadingPane");
-			registry.byId('leadingPane').addChild(dagma.treeLists[nval.id]);
-			registry.byId('layout').resize();
-
+		    if (nval.id == 'detalle'){
+		    	var cp = registry.byId('detalle');
+		    	if (dagma.tree == 'banco'){
+		    		if (cp.href != '../static/detalleBanco.html'){
+		    			cp.set('href','../static/detalleBanco.html');
+		    			cp.activeTree = 'banco';
+		    		}
+		    	}else{
+		    		if (cp.href != '../static/detalleContratos.html'){
+		    			cp.set('href','../static/detalleContratos.html')
+		    			cp.activeTree = 'contratos';
+		    		}
+		    	}
+		    	registry.byId('leadingPane');
+		    }else if(nval.id != 'pivot'){
+				dagma.tree = nval.id;
+			    domConstruct.empty("leadingPane");
+				registry.byId('leadingPane').addChild(dagma.treeLists[nval.id]);
+				registry.byId('layout').resize();		    	
+		    }
 		});
 		tabsContainer.getChildren().forEach(function(tab){
-			tab.set("onDownloadEnd", function() {
-				//This hacky approach is necessary beacause refreshOnShow not working. 
-				//It prevents the content pane from reloading.
-				tab.href='';
-			});
+			if (tab.id != 'detalle'){
+				tab.set("onDownloadEnd", function() {
+					//This hacky approach is necessary beacause refreshOnShow not working. 
+					//It prevents the content pane from reloading.
+					tab.href='';
+				});				
+			}
 		})
 	});
 });
